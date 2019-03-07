@@ -42,22 +42,10 @@ class StudentController extends Controller
         ], 200);
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
-        
-        $recycle = new Recycle;
-
-        $recycle->fname = $request->fname;
-        $recycle->mname = $request->mname;
-        $recycle->lname = $request->lname;
-        $recycle->save();
-
         $student = Student::where('id', $id)->delete();
-
-        return Response::json([
-           'student' => $student, 
-            'recycle' => $recycle
-            ]);
+        return response()->json($student);
     }
 
     public function update(Request $request, $id)
